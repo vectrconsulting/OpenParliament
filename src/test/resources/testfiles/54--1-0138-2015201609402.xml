@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<result>
+    <disclaimer>De beschikbare gegevens zijn niet noodzakelijk up-to-date en compleet. De gegevens die in de huidige
+        fase op deze site gepubliceerd worden, zijn test-gegevens.
+    </disclaimer>
+    <items>
+        <QRVADOC>
+            <link rel="self" href="http://data.dekamer.be/v0/qrva/54--1-0138-2015201609402"/>
+            <SDOCNAME>54--1-0138-2015201609402</SDOCNAME>
+            <ID>172502</ID>
+            <STATUSQ>transmited</STATUSQ>
+            <LEGISL>54</LEGISL>
+            <DOCNAME>2015201609402</DOCNAME>
+            <DEPOTDAT>20160513</DEPOTDAT>
+            <AUT>Roel
+                Deseyn,
+                CD&amp;V
+            </AUT>
+            <LANG>N</LANG>
+            <DEPTPRES>1</DEPTPRES>
+            <DEPTNUM>860</DEPTNUM>
+            <SUBDEPTN>Eerste minister</SUBDEPTN>
+            <SUBDEPTF>Premier Ministre</SUBDEPTF>
+            <DEPTN>Eerste minister</DEPTN>
+            <DEPTF>Premier ministre</DEPTF>
+            <QUESTNUM>138</QUESTNUM>
+            <DELAIDAT>20160617</DELAIDAT>
+            <TITN>Digitale klokkenluiders.</TITN>
+            <TITF>Les lanceurs d'alerte dans le secteur numÃ©rique.</TITF>
+            <TEXTQN>
+
+
+            </TEXTQN>
+            <TEXTQF>
+
+
+            </TEXTQF>
+            <NUMA1>0</NUMA1>
+            <NUMA2>0</NUMA2>
+            <NUMA3>0</NUMA3>
+            <NUMA4>0</NUMA4>
+            <MAIN_THESAF>SECURITE PUBLIQUE</MAIN_THESAF>
+            <MAIN_THESAN>OPENBARE VEILIGHEID</MAIN_THESAN>
+            <THESAF>SECURITE PUBLIQUE | TECHNOLOGIE DE L'INFORMATION | SECURITE ET GARDIENNAGE</THESAF>
+            <THESAN>OPENBARE VEILIGHEID | INFORMATIETECHNOLOGIE | BEVEILIGING EN BEWAKING</THESAN>
+            <THESAD></THESAD>
+            <DESCF></DESCF>
+            <DESCN></DESCN>
+            <DESCD></DESCD>
+            <FREEF></FREEF>
+            <FREEN></FREEN>
+            <FREED></FREED>
+        </QRVADOC>
+    </items>
+</result>
