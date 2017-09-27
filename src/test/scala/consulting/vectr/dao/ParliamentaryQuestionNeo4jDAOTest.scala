@@ -35,9 +35,9 @@ class ParliamentaryQuestionNeo4jDAOTest extends Test with BeforeAndAfterAll {
 
     val session = driver.session()
     val result = session.run(
-      """MATCH (:question {id:"questionId"})-[:ASKED]-(n:author {name:"author"})-[:IS_MEMBER_OF]-(p:party {name:"party"})
+      """MATCH (q:question {id:"questionId"})-[:ASKED]-(n:author {name:"author"})-[:IS_MEMBER_OF]-(p:party {name:"party"})
          WITH n
-         MATCH (n)-[:ASKED_TO]-(d:department)
+         MATCH (q)-[:ASKED_TO]-(d:department)
           return n.name as name,d.name as depname
         """).next()
     session.close()
