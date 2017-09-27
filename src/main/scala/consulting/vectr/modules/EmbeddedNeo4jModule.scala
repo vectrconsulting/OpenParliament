@@ -10,16 +10,24 @@ import org.neo4j.driver.v1.Config
 import org.neo4j.driver.v1.Driver
 import scala.io.Source
 import com.twitter.inject.Logging
+import org.neo4j.graphdb.factory.GraphDatabaseSettings.pagecache_memory
+import org.neo4j.dbms.DatabaseManagementSystemSettings.data_directory
+import java.io.File
 
 /**
  * @author tommichiels
  */
 
 object EmbeddedNeo4jModule extends TwitterModule with Logging {
+  
+  val neo4jPath = System.getProperty("user.home") + File.separator + "OpenData" + File.separator + "neo4j";
+  val dataDir = new File(neo4jPath);
 
   val neo4jControls = {
     val control = TestServerBuilders.
       newInProcessBuilder().
+      withConfig(pagecache_memory, "2g").
+      withConfig(data_directory.name(), dataDir.getAbsolutePath()).
       newServer()
     val driver: Driver = GraphDatabase.driver(control.boltURI(),
       Config.build().withEncryptionLevel(Config.EncryptionLevel.NONE).toConfig());

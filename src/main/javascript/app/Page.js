@@ -4,20 +4,21 @@ import Request from 'react-http-request'
 
 import { NPartiteGraph } from '../lib/graph2'
 import { Navigation } from './Navigation'
+import { Footer } from './Footer'
 
 // eslint-disable-next-line
-const columns =  ["party", "author"]
+const columns =  ["party", "author", "topic_nl", "department_nl"]
 // eslint-disable-next-line
 const partijKleuren = [
     { partij: "N-VA", color: "gold" },
     { partij: "VB", color: "brown" },
-    { partij: "Open Vld", color: "blue" },
+    { partij: "Open Vld", color: "DodgerBlue" },
     { partij: "SP.A", color: "red" },
     { partij: "Vuye&Wouters", color: "DimGray" },
     { partij: "CD&V", color: "orange" },
     { partij: "Ecolo-Groen", color: "green" },
-    { partij: "MR", color: "red" },
-    { partij: "PS", color: "blue" },
+    { partij: "MR", color: "blue" },
+    { partij: "PS", color: "red" },
     { partij: "CDH", color: "orange" },
     { partij: "FDF", color: "pink" },
     { partij: "PTB-GO!", color: "red" },
@@ -86,13 +87,14 @@ export const Page = class Page extends Component {
                 <Navigation />
                 <div className="Container">
                     <Row>
-                        <Col lg={10} md={12} lgOffset={1}><Search /></Col>
+                        <Col lg={10} md={12} xs={12} lgOffset={1}><Search /></Col>
                     </Row>
                     <Row>
-                        <Col lg={8} md ={12} lgOffset={1}><GraphWrapper /></Col>
+                        <Col lg={8} md={12} lgOffset={1}><GraphWrapper /></Col>
                         <Col lg={2} mdHidden smHidden xsHidden ><Sidebar /></Col>
                     </Row>
                 </div>
+                <Footer />
             </div>
         );
     }

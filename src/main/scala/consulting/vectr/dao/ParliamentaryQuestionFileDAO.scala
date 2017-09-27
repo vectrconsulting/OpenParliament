@@ -46,6 +46,6 @@ class ParliamentaryQuestionFileDAO @Inject() (config: Config) extends Logging {
   }
 
   private def getTopic(mixed: String): Option[String] = {
-    if (StringUtils.isEmpty(mixed)) Some(mixed) else None
+    if (StringUtils.isEmpty(mixed)) None else Some(mixed)
   }
 }

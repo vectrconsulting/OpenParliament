@@ -13,6 +13,7 @@ case class ParliamentaryQuestionSummary(
     author: String, 
     party: String, 
     topicNL: String,
+    departmentNL: String,
     questionCount: Int)
 
 case class MemberOfParliament(name: String,surname: String)

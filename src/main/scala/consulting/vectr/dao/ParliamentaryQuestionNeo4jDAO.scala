@@ -29,7 +29,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject() (driver: Driver) {
         MERGE (q:question {id:{questionid}})
         MERGE (a)-[:IS_MEMBER_OF]->(p)
         MERGE (a)-[:ASKED]->(q)
-        MERGE (a)-[:ASKED_TO]->(d)
+        MERGE (q)-[:ASKED_TO]->(d)
         MERGE (q)-[:ASKED_FOR]->(p)
         return *      
         """
@@ -46,10 +46,11 @@ class ParliamentaryQuestionNeo4jDAO @Inject() (driver: Driver) {
         MERGE (q)-[:IS_ABOUT]->(t)
         return *      
         """
-      session.run(topicCypher,
-        Map[String, Object](
-            "questionid" -> pq.questionId,
-            "topicname"-> topic).asJava)
+        session.run(topicCypher,
+          Map[String, Object](
+              "questionid" -> pq.questionId,
+              "topicname"-> topic.trim.toLowerCase.capitalize
+            ).asJava)
         
       }
     } catch {
@@ -71,13 +72,16 @@ class ParliamentaryQuestionNeo4jDAO @Inject() (driver: Driver) {
     val session = driver.session()
     try {
       val cypher = """
-        MATCH (p:party)<-[:IS_MEMBER_OF]-(a:author)-[:ASKED]->(q:question)-[:IS_ABOUT]->(t:topic) WHERE (q)-[:ASKED_FOR]->(p) return a.name as author, p.name as party, t.name as topic, count(q) as count      
+        MATCH (p:party)<-[:IS_MEMBER_OF]-(a:author)-[:ASKED]->(q:question)-[:IS_ABOUT]->(t:topic), (q)-[:ASKED_TO]->(d:department)
+        WHERE (q)-[:ASKED_FOR]->(p)
+        RETURN a.name as author, p.name as party, t.name as topic, d.name as department, count(q) as count      
         """
       val result = session.run(cypher).asScala.toList
       result.map(rec => ParliamentaryQuestionSummary(
           rec.get("author").asString(),
           rec.get("party").asString(),
           rec.get("topic").asString(),
+          rec.get("department").asString(),
           rec.get("count").asInt()))
       
     } catch {
