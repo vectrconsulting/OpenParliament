@@ -2,5 +2,9 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "allowJs": true
-    }
+    },
+    "exclude": [
+        "node_modules",
+        "parlementaire_vragen"
+    ]
 }
