@@ -1,51 +1,69 @@
 package consulting.vectr.dao
 
-import consulting.vectr.model.ParliamentaryQuestion
+import java.io._
 import javax.inject.Inject
-import com.typesafe.config.Config
-import java.io.File
-import ammonite.ops.ls
-import ammonite.ops.Path
-import java.nio.file.Paths
-import ammonite.ops.read
-import scala.xml.XML
-import org.parboiled.common.StringUtils
-import com.twitter.inject.Logging
 
-class ParliamentaryQuestionFileDAO @Inject() (config: Config) extends Logging {
+import ammonite.ops.{Path, ls}
+import com.twitter.concurrent.AsyncStream
+import com.twitter.inject.Logging
+import com.typesafe.config.Config
+import consulting.vectr.model.{DekamerQRVAIdResponse, DekamerQRVAIdResponseItem, ParliamentaryQuestionWeb}
+import io.circe.generic.auto._
+import io.circe.parser._
+
+import scala.io.Source
+
+class ParliamentaryQuestionFileDAO @Inject()(config: Config) extends Logging {
 
   val directory = Path(config.getString("cachedirectory"))
 
-  def getAllPQuestions(): List[ParliamentaryQuestion] = {
-    getListOfXMLFiles().filter(x=> StringUtils.isNotEmpty((x \\ "SDOCNAME").text)).
-      map { x =>
-        info("loading question:" + (x \\ "SDOCNAME").text)
-        val pq = ParliamentaryQuestion(
-          author = getAuthor((x \\ "AUT").text),
-          party = getParty((x \\ "AUT").text),
-          status = (x \\ "STATUSQ").text,
-          topicNL = getTopic((x \\ "MAIN_THESAN").text),
-          subTopicNL = (x \\ "THESAN").text.split('|').map(_.trim().replaceAll(" ", "")).toSet,
-          department = (x \\ "DEPTN").text,
-          questionId = (x \\ "SDOCNAME").text)
-        info(pq)
-        pq
-      }.filter(_.status == "answerReceived")
+  def writePQuestion(filename: String, content: String): Unit = {
+    val file = new File(directory + "/" + filename + ".json")
+    val bw = new BufferedWriter(new FileWriter(file))
+    bw.write(content)
+    bw.close()
   }
 
-  private def getListOfXMLFiles() = {
-    (ls ! directory).toList.map(x => XML.loadFile(x.toString))
+  def loadPQuestions(): AsyncStream[ParliamentaryQuestionWeb] = {
+    AsyncStream.fromSeq((ls ! directory).toList)
+      .filter(p => p.toString.split('.').last == "json")
+      .map(p => Source.fromFile(p.toString()).getLines().mkString(""))
+      .flatMap(str => AsyncStream.fromOption(decode[DekamerQRVAIdResponse](str) match {
+        case Left(error_msg) => None
+        case Right(qRVAIdResponse) =>
+          qRVAIdResponse.items.headOption match {
+            case None => None
+            case Some(head) => Some(createParliamentaryQuestionWeb(head))
+          }
+      }))
   }
 
-  private def getAuthor(mixed: String): String = {
-    mixed.replace("\n", "").split(',')(0).trim().replaceAll(" +", " ")
-  }
-
-  private def getParty(mixed: String): String = {
-    mixed.replace("\n", "").split(',')(1).trim().replaceAll(" +", " ")
-  }
-
-  private def getTopic(mixed: String): Option[String] = {
-    if (StringUtils.isEmpty(mixed)) None else Some(mixed)
-  }
+  private def createParliamentaryQuestionWeb(item: DekamerQRVAIdResponseItem): ParliamentaryQuestionWeb = ParliamentaryQuestionWeb(
+    link = item.link.href.toString,
+    id = item.ID,
+    status = item.STATUSQ.getOrElse("unknown"),
+    legislation = item.LEGISL,
+    sdocname = item.link.href.split('/').takeRight(1).head,
+    document_id = item.DOCNAME.getOrElse(""),
+    document_date = item.DEPOTDAT,
+    author = item.AUT.getOrElse("").split("\n").dropRight(1).map(_.replace(',', ' ').trim).mkString(" "),
+    author_party = item.AUT.getOrElse("").split("\n").takeRight(1).map(_.trim).mkString(" "),
+    language = item.LANG.getOrElse("unknown"),
+    department_number = item.DEPTNUM,
+    department_name_nl = item.DEPTN.getOrElse("unknown"),
+    department_name_fr = item.DEPTF.getOrElse("unknown"),
+    sub_department_name_nl = item.SUBDEPTN,
+    sub_department_name_fr = item.SUBDEPTF,
+    question_number = item.QUESTNUM,
+    title_nl = item.TITN.getOrElse("unknown"),
+    title_fr = item.TITF.getOrElse("unknown"),
+    question_text_nl = item.TEXTQN.map(_.br.head),
+    question_text_fr = item.TEXTQF.map(_.br.head),
+    answer_text_nl = item.TEXTA1N.map(_.br.head),
+    answer_text_fr = item.TEXTA1F.map(_.br.head),
+    subject_nl = item.MAIN_THESAN,
+    subject_fr = item.MAIN_THESAF,
+    sub_subject_nl = item.THESAN.head.split('|').map(_.trim.toLowerCase.capitalize).toList,
+    sub_subject_fr = item.THESAF.head.split('|').map(_.trim.toLowerCase.capitalize).toList
+  )
 }

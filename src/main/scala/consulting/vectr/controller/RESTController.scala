@@ -1,27 +1,35 @@
 package consulting.vectr.controller
 
-import java.util.Date
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
-import com.twitter.finatra.http.response.ResponseBuilder
-import com.twitter.finatra.http.routing.FileResolver
-import com.twitter.util.Duration
-
-import scala.language.postfixOps
-import scala.util.{Failure, Success, Try}
 import consulting.vectr.service.DataService
 
-class RESTController @Inject() (service: DataService) extends Controller {
+import scala.language.postfixOps
 
+class RESTController @Inject()(service: DataService) extends Controller {
   get("/pq") { request: Request =>
-    service.getAllParliamentaryQuestions()
+    service.getAllParliamentaryQuestions(request.getParam("lang"))
   }
-  
+
   get("/loadpq") { request: Request =>
-    service.getDataFromFileAndInserInNeo4j()
+    service.getDataFromWebAndInsertInNeo4j()
+  }
+
+  get("/loadfiles") { request: Request =>
+    service.getDataFromFilesAndInsertInNeo4j()
+  }
+
+  get("/questionfilter") { request: Request => {
+      val entities = service.getResolvedEntitiesAndSaveToNeo4j(request.getParam("q"))
+      entities
+    }
+
+  }
+
+  get("/topquestions") { request: Request =>
+    service.getTopQuestionsFromNeo4j(request.getParam("top", "5").toInt,request.getParam("lang","nl"))
   }
 
 }

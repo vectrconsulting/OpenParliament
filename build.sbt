@@ -13,6 +13,7 @@ licenses := Seq("Apache 2" -> new URL("http://www.apache.org/licenses/LICENSE-2.
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 enablePlugins(JavaAppPackaging)
 enablePlugins(DockerPlugin)
+enablePlugins(ScoverageSbtPlugin)
 maintainer in Docker := "Tom Michiels <tom.michiels@vectr.consulting>"
     dockerCommands ++= Seq(
       Cmd("USER", "root"),
@@ -31,3 +32,13 @@ libraryDependencies ++=  compileStage(jerseyCore)
 libraryDependencies ++=  logbackElastic
 libraryDependencies += "com.lihaoyi" %% "ammonite-ops" % "1.0.2"
 libraryDependencies += "org.scala-lang.modules" % "scala-xml_2.11" % "1.0.6"
+libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.3.0"
+libraryDependencies += "org.scalamock" %% "scalamock-scalatest-support" % "3.6.0" % Test
+
+val circeVersion = "0.8.0"
+libraryDependencies ++= Seq(
+  "io.circe" %% "circe-core",
+  "io.circe" %% "circe-generic",
+  "io.circe" %% "circe-parser"
+).map(_ % circeVersion)
+

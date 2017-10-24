@@ -1,0 +1,90 @@
+{
+  "disclaimer": "De beschikbare gegevens zijn niet noodzakelijk up-to-date en compleet. De gegevens die in de huidige fase op deze site gepubliceerd worden, zijn test-gegevens.",
+  "items": [
+    {
+      "link": {
+        "href": "http://data.dekamer.be/v0/qrva/54-B001-3-0001-0000201400004",
+        "rel": "self"
+      },
+      "ID": 146303,
+      "STATUSQ": "answerReceived",
+      "LEGISL": 54,
+      "DOCNAME": "0000201400004",
+      "DEPOTDAT": "20140718",
+      "AUT": "Nahima\n      Lanjri,\n      CD&V",
+      "LANG": "N",
+      "DEPTPRES": 3,
+      "DEPTNUM": 822,
+      "SUBDEPTN": "Buitenlandse Zaken, Buitenlandse Handel en Europese Zaken",
+      "SUBDEPTF": "Affaires étrangères, Commerce extérieur et Affaires européennes",
+      "DEPTN": "Vice-eersteminister en minister van Buitenlandse Zaken, Buitenlandse Handel en Europese Zaken",
+      "DEPTF": "Vice-premier ministre et ministre des Affaires étrangères, du Commerce extérieur et des Affaires européennes",
+      "QUESTNUM": 1,
+      "DELAIDAT": "20190527",
+      "TITN": "Onderzoek naar schijnhuwelijken en schijn-wettelijke samenwoonst. - Ambassades. - Instructies.",
+      "TITF": "Enquête relative aux mariages de complaisance et aux cohabitations légales de complaisance. - Ambassades. - Instructions.",
+      "STATUS_OL": null,
+      "TEXTQN": {
+        "br": [
+          "In het kader van de strijd tegen de schijnhuwelijken en de schijn-wettelijke samenwoonst wordt ook door onze ambassades in het buitenland een onderzoek gevoerd naar mogelijk misbruik van de migratiewet door huwelijksmigratie.In vele landen moeten mensen echter een zeer lange afstand afleggen om de Belgische ambassade te bezoeken in het kader van dit onderzoek. Problematisch daarbij is vooral dat zij niet of nauwelijks ingelicht worden over de nodige documenten of de inhoud van het interview dat zal plaatshebben. Het komt dan ook vaak voor dat de mensen onvoldoende documenten of bewijsmiddelen mee hebben en hun reis dus opnieuw moeten ondernemen om nieuwe bewijsstukken aan te leveren.1. Welke instructies worden aan de ambassades gegeven in het kader van het onderzoek naar schijnhuwelijken en schijn-wettelijke samenwoonst?2. Zijn de ambassades verplicht de mensen op voorhand in te lichten over welke documenten en bewijsmiddelen zij dienen te presenteren in het kader van hun interview?3. Indien niet, overweegt u hierover duidelijke richtlijnen op te stellen zodat de betrokken personen niet onverricht ter zake moeten terugkeren bij gebrek aan onvoldoende bewijsmiddelen of documenten?"
+        ]
+      },
+      "STATUS_SL": null,
+      "TEXTQF": {
+        "br": [
+          "Dans le cadre de la lutte contre les mariages de complaisance et les cohabitations légales de complaisance, nos ambassades à l'étranger mènent également l'enquête sur les abus éventuels commis dans le cadre de la loi sur la migration au travers de la migration matrimoniale.Dans de nombreux pays, les personnes concernées par l'enquête doivent toutefois parcourir de très longues distances pour se rendre à l'ambassade belge. Le problème réside surtout dans le fait qu'elles ne sont pas ou qu'elles sont mal informées sur les documents dont elles doivent disposer ou du contenu de la future interview. Il arrive dès lors souvent que les personnes ne disposent pas de tous les documents ou preuves nécessaires et doivent ainsi refaire le voyage pour apporter les pièces justificatives manquantes.1. Quelles instructions sont communiquées aux ambassades dans le cadre de l'enquête relative aux mariages de complaisance et aux cohabitations légales de complaisance?2. Les ambassades sont-elles tenues d'informer préalablement les personnes sur les documents et les preuves à présenter dans le cadre de leur interview?3. Dans la négative, envisagez-vous de rédiger des directives claires à ce sujet de sorte que les personnes concernées ne rentrent pas bredouilles de leur visite à l'ambassade pour cause de preuves ou de documents manquants?"
+        ]
+      },
+      "PUBLICA1": "B001,\n      ,\n      10/10/2014,\n      00002014",
+      "STATUSA1": "publicated",
+      "NUMA1": 1,
+      "CASA1": "1\n      réponse normale -\n      normaal antwoord",
+      "TEXTA1F": {
+        "br": [
+          "J'attire votre attention sur le fait qu'un déplacement vers le poste consulaire n'est pas toujours nécessaire. La demande d'un certificat de non-empêchement à mariage peut se faire par écrit. Sauf dans les cas où des éléments peuvent faire croire à  l'éventualité d'un mariage blanc, l'attestation est envoyée au demandeur.Si lors de la demande, des documents manquent, le poste demande de les envoyer.Si une interview au poste consulaire s'impose, un rendez-vous est fixé  - dans la plupart des cas par téléphone. À cette occasion le demandeur est informé des documents qu'il devra présenter.Un déplacement inutile vers le consulat est donc pratiquement exclu."
+        ]
+      },
+      "TEXTA1N": {
+        "br": [
+          "Ik wil er eerst op wijzen dat een bezoek aan de consulaire post niet altijd noodzakelijk is. De aanvraag voor een attest geen huwelijksbeletsel kan schriftelijk gebeuren. Tenzij er elementen zouden zijn die kunnen wijzen op een mogelijk schijnhuwelijk, wordt het attest naar de aanvrager opgezonden. Indien bij de aanvraag niet alle nodige bewijsstukken aanwezig waren, wordt gevraagd die alsnog op te zenden.Als een interview op de consulaire post nodig blijkt, wordt - meestal telefonisch - een afspraak geregeld; bij deze gelegenheid wordt aan de betrokkenen meegedeeld welke documenten ze moeten meebrengen.Een nutteloze verplaatsing naar het consulaat is dus zo goed als uitgesloten."
+        ]
+      },
+      "PUBLICA2": null,
+      "STATUSA2": null,
+      "NUMA2": 0,
+      "CASA2": null,
+      "TEXTA2F": null,
+      "TEXTA2N": null,
+      "PUBLICA3": null,
+      "STATUSA3": null,
+      "NUMA3": 0,
+      "CASA3": null,
+      "TEXTA3F": null,
+      "TEXTA3N": null,
+      "PUBLICA4": null,
+      "STATUSA4": null,
+      "NUMA4": 0,
+      "CASA4": null,
+      "TEXTA4F": null,
+      "TEXTA4N": null,
+      "MAIN_THESAF": " POLITIQUE EXTERIEURE ",
+      "MAIN_THESAN": " BUITENLANDS BELEID ",
+      "MAIN_THESAD": null,
+      "THESAF": [
+        " UNION LIBRE  |  POLITIQUE EXTERIEURE  |  ADMISSION DES ETRANGERS  |  FORMALITE ADMINISTRATIVE  |  AMBASSADE  |  MARIAGE DE COMPLAISANCE "
+      ],
+      "THESAN": [
+        " ONGEHUWD SAMENLEVEN  |  BUITENLANDS BELEID  |  TOELATING VAN VREEMDELINGEN  |  ADMINISTRATIEVE FORMALITEIT  |  AMBASSADE  |  SCHIJNHUWELIJK "
+      ],
+      "THESAD": [
+        ""
+      ],
+      "DESCF": "",
+      "DESCN": "",
+      "DESCD": "",
+      "FREEF": "",
+      "FREEN": "",
+      "FREED": ""
+    }
+  ]
+}
