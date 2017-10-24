@@ -1,0 +1,143 @@
+{
+    "name": "department",
+    "entries": [
+        {
+            "value": "Staatssecretaris voor Armoedebestrijding, Gelijke Kansen, Personen met een beperking, en Wetenschapsbeleid, belast met Grote Steden, toegevoegd aan de Minister van Veiligheid en Binnenlandse Zaken",
+            "synonyms": [
+                "staatssecretaris voor armoedebestrijding, gelijke kansen, personen met een beperking, en wetenschapsbeleid, belast met grote steden, toegevoegd aan de minister van veiligheid en binnenlandse zaken",
+                "staatssecretaris voor armoedebestrijding",
+                "staatssecretaris voor gelijke kansen",
+                "staatssecretaris voor personen met een beperking"
+            ]
+        },
+        {
+            "value": "Vice-eersteminister en minister van Werk, Economie en Consumenten, belast met Buitenlandse Handel",
+            "synonyms": [
+                "minister van werk",
+                "minister van economie",
+                "minister van buitenlandse handel"
+            ]
+        },
+        {
+            "value": "Minister van Begroting, belast met de Nationale Loterij",
+            "synonyms": [
+                "minister van begroting"
+            ]
+        },
+        {
+            "value": "Minister van Middenstand, Zelfstandigen, KMO's, Landbouw en Maatschappelijke Integratie",
+            "synonyms": [
+                "minister van middenstand",
+                "minister van zelfstandigen",
+                "minister van kmo's",
+                "minister van landbouw",
+                "minister van maatschappelijke integratie"
+            ]
+        },
+        {
+            "value": "Minister van Energie, Leefmilieu en Duurzame Ontwikkeling",
+            "synonyms": [
+                "minister van energie, leefmilieu en duurzame ontwikkeling",
+                "minister van energie",
+                "minister van leefmilieu",
+                "minister van duurzame ontwikkeling"
+            ]
+        },
+        {
+            "value": "Vice-eersteminister en minister van Veiligheid en Binnenlandse Zaken, belast met de Regie der Gebouwen",
+            "synonyms": [
+                "minister van veiligheid",
+                "minister van binnenlandse zaken"
+            ]
+        },
+        {
+            "value": "Eerste minister",
+            "synonyms": [
+                "eerste minister",
+                "premier"
+            ]
+        },
+        {
+            "value": "Minister van Justitie",
+            "synonyms": [
+                "minister van justitie"
+            ]
+        },
+        {
+            "value": "Vice-eersteminister en minister van Buitenlandse Zaken en Europese Zaken, belast met Beliris en de Culturele Instellingen",
+            "synonyms": [
+                "vice-eersteminister en minister van buitenlandse zaken en europese zaken, belast met beliris en de culturele instellingen",
+                "minister van buitenlandse zaken",
+                "minister van europese zaken"
+            ]
+        },
+        {
+            "value": "Vice-eersteminister en minister van Ontwikkelingssamenwerking, Digitale Agenda, Telecommunicatie en Post",
+            "synonyms": [
+                "vice-eersteminister en minister van ontwikkelingssamenwerking, digitale agenda, telecommunicatie en post",
+                "minister van ontwikkelingssamenwerking",
+                "minister van telecommunicatie en post",
+                "minister van digitale agenda"
+            ]
+        },
+        {
+            "value": "Minister van Financiën, belast met Bestrijding van de fiscale fraude",
+            "synonyms": [
+                "minister van financiën, belast met bestrijding van de fiscale fraude",
+                "minister van financien",
+                "minister van financiën"
+            ]
+        },
+        {
+            "value": "Minister van Sociale Zaken en Volksgezondheid",
+            "synonyms": [
+                "minister van sociale zaken en volksgezondheid",
+                "minister van sociale zaken",
+                "minister van volksgezondheid"
+            ]
+        },
+        {
+            "value": "Minister van Defensie, belast met Ambtenarenzaken",
+            "synonyms": [
+                "minister van defensie, belast met ambtenarenzaken",
+                "minister van defensie"
+            ]
+        },
+        {
+            "value": "Staatssecretaris voor Bestrijding van de sociale fraude, Privacy en Noordzee, toegevoegd aan de minister van Sociale Zaken en Volksgezondheid",
+            "synonyms": [
+                "staatssecretaris voor bestrijding van de sociale fraude, privacy en noordzee, toegevoegd aan de minister van sociale zaken en volksgezondheid",
+                "staatssecretaris voor bestrijding van de sociale fraude",
+                "staatssecretaris voor privacy",
+                "staatssecretaris voor noordzee"
+            ]
+        },
+        {
+            "value": "Minister van Pensioenen",
+            "synonyms": [
+                "minister van pensioenen"
+            ]
+        },
+        {
+            "value": "Staatssecretaris voor Buitenlandse Handel, toegevoegd aan de minister belast met Buitenlandse Handel",
+            "synonyms": [
+                "staatssecretaris voor buitenlandse handel, toegevoegd aan de minister belast met buitenlandse handel",
+                "staatssecretaris voor buitenlandse handel"
+            ]
+        },
+        {
+            "value": "Staatssecretaris voor Asiel en Migratie, belast met Administratieve Vereenvoudiging, toegevoegd aan de minister van Veiligheid en Binnenlandse Zaken",
+            "synonyms": [
+                "staatssecretaris voor asiel en migratie, belast met administratieve vereenvoudiging, toegevoegd aan de minister van veiligheid en binnenlandse zaken",
+                "staatssecretaris voor asiel en migratie"
+            ]
+        },
+        {
+            "value": "Minister van Mobiliteit, belast met Belgocontrol en de Nationale Maatschappij der Belgische spoorwegen",
+            "synonyms": [
+                "minister van mobiliteit, belast met belgocontrol en de nationale maatschappij der belgische spoorwegen",
+                "minister van mobiliteit"
+            ]
+        }
+    ]
+}

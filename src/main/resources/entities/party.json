@@ -1,0 +1,119 @@
+{
+    "name": "party",
+    "entries": [
+        {
+            "value": "Open Vld",
+            "synonyms": [
+                "Open Vld",
+                "open vld"
+            ]
+        },
+        {
+            "value": "Ecolo-Groen",
+            "synonyms": [
+                "Ecolo-Groen",
+                "ecolo-groen",
+                "groen"
+            ]
+        },
+        {
+            "value": "CD&V",
+            "synonyms": [
+                "CD&V",
+                "cd&v",
+                "cdnv"
+            ]
+        },
+        {
+            "value": "MR",
+            "synonyms": [
+                "MR",
+                "mr"
+            ]
+        },
+        {
+            "value": "VB",
+            "synonyms": [
+                "VB",
+                "vb",
+                "vlaams belang"
+            ]
+        },
+        {
+            "value": "DEFI",
+            "synonyms": [
+                "DEFI",
+                "defi"
+            ]
+        },
+        {
+            "value": "CDH",
+            "synonyms": [
+                "CDH",
+                "cdh"
+            ]
+        },
+        {
+            "value": "PTB-GO!",
+            "synonyms": [
+                "PTB-GO!",
+                "ptb-go!",
+                "ptb go"
+            ]
+        },
+        {
+            "value": "N-VA",
+            "synonyms": [
+                "N-VA",
+                "n-va",
+                "nva",
+                "NVA"
+            ]
+        },
+        {
+            "value": "PS",
+            "synonyms": [
+                "PS",
+                "ps"
+            ]
+        },
+        {
+            "value": "SP.A",
+            "synonyms": [
+                "SP.A",
+                "sp.a",
+                "SPA",
+                "spa"
+            ]
+        },
+        {
+            "value": "Vuye&Wouters",
+            "synonyms": [
+                "Vuye&Wouters",
+                "vuye&wouters",
+                "vuye en wouters"
+            ]
+        },
+        {
+            "value": "ONAFH",
+            "synonyms": [
+                "ONAFH",
+                "onafh"
+            ]
+        },
+        {
+            "value": "VUWO",
+            "synonyms": [
+                "VUWO",
+                "vuwo"
+            ]
+        },
+        {
+            "value": "PP",
+            "synonyms": [
+                "PP",
+                "pp"
+            ]
+        }
+    ]
+}

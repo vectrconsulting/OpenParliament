@@ -9,6 +9,7 @@ import com.twitter.finatra.http.Controller
 import com.twitter.finatra.http.response.ResponseBuilder
 import com.twitter.finatra.http.routing.FileResolver
 import com.twitter.util.Duration
+import consulting.vectr.service.ScheduledLoaderService
 
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
@@ -17,10 +18,12 @@ object AppController {
   private val DEFAULT_EXPIRE_TIME_MS: Long = 86400000L // 1 day
 }
 
-class AppController @Inject() (resolver: FileResolver) extends Controller {
+class AppController @Inject() (resolver: FileResolver,
+                               scheduledloader: ScheduledLoaderService) extends Controller {
   import AppController._
 
   private val disableCache: Boolean = false
+  scheduledloader.start()
 
   get("/ui/:*") { request: Request =>
     val resourcePath = request.getParam("*")
