@@ -6,91 +6,76 @@ import com.twitter.concurrent.AsyncStream
 import com.twitter.finatra.utils.FuturePools
 import com.twitter.inject.Logging
 import consulting.vectr.dao._
-import consulting.vectr.model.{ParliamentaryQuestionSummary, WitAIEntity, WitAIResponse}
-
-import io.circe.syntax._
+import consulting.vectr.model.{ParliamentaryQuestionSummary, ParliamentaryQuestionWeb, Filter}
 
 class DataService @Inject()(neodao: ParliamentaryQuestionNeo4jDAO,
                             webdao: ParliamentaryQuestionWebDAO,
                             filedao: ParliamentaryQuestionFileDAO,
-                            nlpservice: NLPService
+                            nlpServiceFactory: NLPServiceFactory
                            ) extends Logging {
-
   private val futurePool = FuturePools.unboundedPool("CallbackConverter")
+  private val nlpServiceNL = nlpServiceFactory.NLPService("nl")
+  private val nlpServiceFR = nlpServiceFactory.NLPService("fr")
 
-  def getDataFromFilesAndInsertInNeo4j(): Unit = {
+  def dataFromFilesAndInsertInNeo4j(): Unit = {
+    val sdocnames: Set[String] = neodao.allSDOCNAMES
     filedao.loadPQuestions()
-      .filter(pq => !neodao.hasSDOCNAME(pq.sdocname))
+      .filter(pq => !sdocnames.contains(pq.sdocname))
       .foreach {
         pq => neodao.storePQuestionWeb(pq)
       }
   }
 
-  def getDataFromWebAndInsertInNeo4j(): Unit = {
-    val sdocnames = neodao.getAllSDOCNAMES
-    val pq_stream = webdao.getAllIDsAsStream
-      .filter(id => !sdocnames.contains(id))
-      .flatMap(id => AsyncStream.fromOption(webdao.getObject(id)))
+  def dataFromWebAndInsertInNeo4j(): Unit = {
+    val sdocnames: Set[String] = neodao.allSDOCNAMES
+    val pq_stream: AsyncStream[String] = webdao.getAllIDsAsStream
+    val pq_stream_filtered: AsyncStream[String] = if (sdocnames.nonEmpty) {
+      pq_stream.filter(id => !sdocnames.contains(id))
+    } else {
+      pq_stream
+    }
 
-    pq_stream.foreach { pq => {
+    val pq_stream_retrieved: AsyncStream[(String, ParliamentaryQuestionWeb)] =
+      pq_stream_filtered.flatMap(id => AsyncStream.fromOption(webdao.getObject(id)))
+
+    pq_stream_retrieved.foreach { pq => {
       filedao.writePQuestion(pq._2.sdocname, pq._1)
       neodao.storePQuestionWeb(pq._2)
     }
-    }.onSuccess { _ => info("Done loading pq's from web") }
-  }
-
-  def getAllParliamentaryQuestions(lang: String = "nl"): List[ParliamentaryQuestionSummary] = {
-    neodao.getAllPQuestions(lang)
-  }
-
-  def getResolvedEntitiesAndSaveToNeo4j(query: String): String = {
-    val entities = nlpservice.getEntitiesFromSentence(query)
-
-    futurePool {
-      neodao.storeFilters(entities)
+    }.onSuccess { _ => {
+      nlpServiceNL.reloadResources()
+      nlpServiceFR.reloadResources()
+      info("Done loading pq's from web")
     }
-
-    entities.asJson.toString
+    }
   }
 
-  def getTopQuestionsFromNeo4j(top: Int, lang: String): String = {
-    val filters = neodao.getTopFilters(top)
-    val title = nlpservice.title
-
-    var json =
-      s"""
-          {
-            "sidebar_title" : "$title",
-            "lang": "$lang",
-            "questions" : [
-      """
-    filters.foreach(filter => {
-      val count = filter._1
-      val entities = filter._2
-      val question = nlpservice.buildQuestion(entities)
-
-      var entities_json = "["
-
-      entities.foreach((entity) => {
-        val e_type = entity._1
-        val e_value = entity._2
-        entities_json +=
-          s"""
-            {
-              "type": "$e_type",
-              "value": "$e_value"
-            },"""
-      })
-      entities_json = entities_json.dropRight(1) + "]"
-      json +=
-        s"""
-           {
-              "count": $count,
-              "question": "$question",
-              "entities": $entities_json
-           },"""
-    })
-
-    json.dropRight(1) + "\n]}"
+  def allParliamentaryQuestions(lang: String): List[ParliamentaryQuestionSummary] = {
+    neodao.allPQuestions(lang)
   }
+
+  def resolvedEntitiesAndSaveToNeo4j(query: String, lang: String): Map[String, Set[String]] = {
+    val entities: Map[String, Set[String]] = lang match {
+      case "nl" => nlpServiceNL.entitiesFromSentence(query)
+      case "fr" => nlpServiceFR.entitiesFromSentence(query)
+    }
+    futurePool {
+      neodao.storeFilters(entities, lang)
+    }
+    entities
+  }
+
+  def topQuestionsFromNeo4j(top: Int, lang: String): List[Filter] = lang match {
+    case "nl" => nlpServiceNL.topQuestions(top)
+    case "fr" => nlpServiceFR.topQuestions(top)
+  }
+
+  def allQuestionFromNeo4j(lang: String): List[Filter] = lang match {
+    case "nl" => nlpServiceNL.allQuestions
+    case "fr" => nlpServiceFR.allQuestions
+  }
+
+  def updateFilterInNeo4j(id: Int, public: Boolean): Unit = neodao.updateFilter(id, public)
+
+  def removeFilterInNeo4j(id: Int): Unit = neodao.removeFilter(id)
 }

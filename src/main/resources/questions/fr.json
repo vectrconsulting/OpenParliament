@@ -1,0 +1,32 @@
+{
+  "start": [
+    "Donne moi toutes les questions",
+    "Toutes les questions"
+  ],
+  "author": [
+    " posées par ",
+    " de "
+  ],
+  "party": [
+    " du parti ",
+    " de "
+  ],
+  "or": [
+    " ou "
+  ],
+  "and": [
+    " et "
+  ],
+  "topic": [
+    " sur ",
+    " avec le sujet "
+  ],
+  "department": [
+    " posées par ",
+    " adressée à "
+  ],
+  "title": [
+    "Filtres les plus utilisés"
+  ]
+
+}

@@ -10,26 +10,35 @@ import scala.language.postfixOps
 
 class RESTController @Inject()(service: DataService) extends Controller {
   get("/pq") { request: Request =>
-    service.getAllParliamentaryQuestions(request.getParam("lang"))
+    service.allParliamentaryQuestions(request.getParam("lang"))
   }
 
-  get("/loadpq") { request: Request =>
-    service.getDataFromWebAndInsertInNeo4j()
+  post("/loadpq") { request: Request =>
+    service.dataFromWebAndInsertInNeo4j()
   }
 
-  get("/loadfiles") { request: Request =>
-    service.getDataFromFilesAndInsertInNeo4j()
+  post("/loadfiles") { request: Request =>
+    service.dataFromFilesAndInsertInNeo4j()
   }
 
-  get("/questionfilter") { request: Request => {
-      val entities = service.getResolvedEntitiesAndSaveToNeo4j(request.getParam("q"))
-      entities
-    }
-
+  get("/questionfilter") { request: Request =>
+    service.resolvedEntitiesAndSaveToNeo4j(request.getParam("q"), request.getParam("lang","nl"))
   }
 
   get("/topquestions") { request: Request =>
-    service.getTopQuestionsFromNeo4j(request.getParam("top", "5").toInt,request.getParam("lang","nl"))
+    service.topQuestionsFromNeo4j(request.getParam("top", "5").toInt, request.getParam("lang","nl"))
+  }
+
+  get("/allfilters") {request: Request =>
+    service.allQuestionFromNeo4j(request.getParam("lang", "nl"))
+  }
+
+  post("/updateFilter") {request: Request =>
+    service.updateFilterInNeo4j(request.getParam("id").toInt, request.getParam("public", "false").toBoolean)
+  }
+
+  post("/removeFilter") {request: Request =>
+    service.removeFilterInNeo4j(request.getParam("id").toInt)
   }
 
 }
