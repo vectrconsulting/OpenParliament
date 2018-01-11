@@ -3,7 +3,7 @@ package consulting.vectr.dao
 import java.io._
 import javax.inject.Inject
 
-import ammonite.ops.{Path, ls}
+import ammonite.ops.{Path, ls, pwd, rm}
 import com.twitter.concurrent.AsyncStream
 import com.twitter.inject.Logging
 import com.typesafe.config.Config
@@ -18,10 +18,19 @@ class ParliamentaryQuestionFileDAO @Inject()(config: Config) extends Logging {
   val directory = Path(config.getString("cachedirectory"))
 
   def writePQuestion(filename: String, content: String): Unit = {
+    rm ! Path(directory + "/" + filename + ".json")
     val file = new File(directory + "/" + filename + ".json")
-    val bw = new BufferedWriter(new FileWriter(file))
-    bw.write(content)
-    bw.close()
+    try{
+      val fw = new FileWriter(file)
+      val bw = new BufferedWriter(fw)
+      bw.write(content)
+      bw.close()
+    }catch {
+      case x: Throwable =>
+        error(x.getMessage)
+        throw x
+    } finally {
+    }
   }
 
   def loadPQuestions(): AsyncStream[ParliamentaryQuestionWeb] = {

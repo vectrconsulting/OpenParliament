@@ -22,7 +22,7 @@ import java.io.File
 
 object EmbeddedNeo4jModule extends TwitterModule with Logging {
   
-  val neo4jPath: String = System.getProperty("user.home") + File.separator + "OpenData" + File.separator + "neo4j";
+  val neo4jPath: String = System.getProperty("user.home") + File.separator + "OpenData" + File.separator + "neo4j"
   val dataDir: File = new File(neo4jPath)
 
   val neo4jControls: ServerControls = {
@@ -38,7 +38,7 @@ object EmbeddedNeo4jModule extends TwitterModule with Logging {
     val session = driver.session()
     val index = Source.fromInputStream(this.getClass.getResourceAsStream("/Indexes.cql"))
 
-    index.getLines().filter(_.contains("CREATE")).foreach(session.run)
+    index.getLines().filter(line => line.contains("CREATE") || line.contains("MERGE")).foreach(session.run)
     session.close()
     index.close()
     info(s"neo4j url: ${control.httpURI()}")

@@ -1,0 +1,285 @@
+{
+    "name": "topic",
+    "entries": [
+        {
+            "value": "Sociaal beleid",
+            "synonyms": [
+                "Sociaal beleid",
+                "sociaal beleid"
+            ]
+        },
+        {
+            "value": "Economisch beleid",
+            "synonyms": [
+                "Economisch beleid",
+                "economisch beleid"
+            ]
+        },
+        {
+            "value": "Overheid",
+            "synonyms": [
+                "Overheid",
+                "overheid"
+            ]
+        },
+        {
+            "value": "Milieubeleid",
+            "synonyms": [
+                "Milieubeleid",
+                "milieubeleid"
+            ]
+        },
+        {
+            "value": "Openbare veiligheid",
+            "synonyms": [
+                "Openbare veiligheid",
+                "openbare veiligheid"
+            ]
+        },
+        {
+            "value": "Burgerbescherming",
+            "synonyms": [
+                "Burgerbescherming",
+                "burgerbescherming"
+            ]
+        },
+        {
+            "value": "Landbouwbeleid",
+            "synonyms": [
+                "Landbouwbeleid",
+                "landbouwbeleid"
+            ]
+        },
+        {
+            "value": "Gezondheidsbeleid",
+            "synonyms": [
+                "Gezondheidsbeleid",
+                "gezondheidsbeleid"
+            ]
+        },
+        {
+            "value": "Energiebeleid",
+            "synonyms": [
+                "Energiebeleid",
+                "energiebeleid"
+            ]
+        },
+        {
+            "value": "Buitenlands beleid",
+            "synonyms": [
+                "Buitenlands beleid",
+                "buitenlands beleid"
+            ]
+        },
+        {
+            "value": "Strafrecht",
+            "synonyms": [
+                "Strafrecht",
+                "strafrecht"
+            ]
+        },
+        {
+            "value": "Telecommunicatie",
+            "synonyms": [
+                "Telecommunicatie",
+                "telecommunicatie"
+            ]
+        },
+        {
+            "value": "Ontwikkelingshulp",
+            "synonyms": [
+                "Ontwikkelingshulp",
+                "ontwikkelingshulp"
+            ]
+        },
+        {
+            "value": "Fiscaliteit",
+            "synonyms": [
+                "Fiscaliteit",
+                "fiscaliteit"
+            ]
+        },
+        {
+            "value": "Migratiebeleid",
+            "synonyms": [
+                "Migratiebeleid",
+                "migratiebeleid"
+            ]
+        },
+        {
+            "value": "Postdienst",
+            "synonyms": [
+                "Postdienst",
+                "postdienst"
+            ]
+        },
+        {
+            "value": "Burgerlijk recht",
+            "synonyms": [
+                "Burgerlijk recht",
+                "burgerlijk recht"
+            ]
+        },
+        {
+            "value": "Defensiebeleid",
+            "synonyms": [
+                "Defensiebeleid",
+                "defensiebeleid"
+            ]
+        },
+        {
+            "value": "Ondernemingsbeleid",
+            "synonyms": [
+                "Ondernemingsbeleid",
+                "ondernemingsbeleid"
+            ]
+        },
+        {
+            "value": "Sociale zekerheid",
+            "synonyms": [
+                "Sociale zekerheid",
+                "sociale zekerheid"
+            ]
+        },
+        {
+            "value": "Vervoerbeleid",
+            "synonyms": [
+                "Vervoerbeleid",
+                "vervoerbeleid"
+            ]
+        },
+        {
+            "value": "Arbeid",
+            "synonyms": [
+                "Arbeid",
+                "arbeid"
+            ]
+        },
+        {
+            "value": "Financiele instelling",
+            "synonyms": [
+                "Financiele instelling",
+                "financiele instelling"
+            ]
+        },
+        {
+            "value": "Volksgezondheid",
+            "synonyms": [
+                "Volksgezondheid",
+                "volksgezondheid"
+            ]
+        },
+        {
+            "value": "Sociaal leven",
+            "synonyms": [
+                "Sociaal leven",
+                "sociaal leven"
+            ]
+        },
+        {
+            "value": "Rechtsstelsel",
+            "synonyms": [
+                "Rechtsstelsel",
+                "rechtsstelsel"
+            ]
+        },
+        {
+            "value": "Krijgsmacht",
+            "synonyms": [
+                "Krijgsmacht",
+                "krijgsmacht"
+            ]
+        },
+        {
+            "value": "Begroting",
+            "synonyms": [
+                "Begroting",
+                "begroting"
+            ]
+        },
+        {
+            "value": "Grondwettelijk recht",
+            "synonyms": [
+                "Grondwettelijk recht",
+                "grondwettelijk recht"
+            ]
+        },
+        {
+            "value": "Nucleair beleid",
+            "synonyms": [
+                "Nucleair beleid",
+                "nucleair beleid"
+            ]
+        },
+        {
+            "value": "Verkeersveiligheid",
+            "synonyms": [
+                "Verkeersveiligheid",
+                "verkeersveiligheid"
+            ]
+        },
+        {
+            "value": "Computercriminaliteit",
+            "synonyms": [
+                "Computercriminaliteit",
+                "computercriminaliteit"
+            ]
+        },
+        {
+            "value": "Post en telecommunicatie",
+            "synonyms": [
+                "Post en telecommunicatie",
+                "post en telecommunicatie"
+            ]
+        },
+        {
+            "value": "Museum",
+            "synonyms": [
+                "Museum",
+                "museum"
+            ]
+        },
+        {
+            "value": "Buitenlandse handel",
+            "synonyms": [
+                "Buitenlandse handel",
+                "buitenlandse handel"
+            ]
+        },
+        {
+            "value": "Elektronische overheid",
+            "synonyms": [
+                "Elektronische overheid",
+                "elektronische overheid"
+            ]
+        },
+        {
+            "value": "Vluchteling",
+            "synonyms": [
+                "Vluchteling",
+                "vluchteling"
+            ]
+        },
+        {
+            "value": "Vervoer per spoor",
+            "synonyms": [
+                "Vervoer per spoor",
+                "vervoer per spoor"
+            ]
+        },
+        {
+            "value": "Detailhandel",
+            "synonyms": [
+                "Detailhandel",
+                "detailhandel"
+            ]
+        },
+        {
+            "value": "Overheidsopdracht",
+            "synonyms": [
+                "Overheidsopdracht",
+                "overheidsopdracht"
+            ]
+        }
+    ]
+}

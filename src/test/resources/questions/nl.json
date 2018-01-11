@@ -1,0 +1,33 @@
+{
+  "start": [
+    "Geef mij alle vragen",
+    "Alle vragen"
+  ],
+  "author": [
+    " gesteld door ",
+    " van "
+  ],
+  "party": [
+    " van partij ",
+    " van "
+  ],
+  "or": [
+    " of "
+  ],
+  "and": [
+    " en "
+  ],
+  "topic": [
+    " over ",
+    " met als onderwerp ",
+    " die gaan over "
+  ],
+  "department": [
+    " gesteld aan de ",
+    " gericht aan de ",
+    " voor de "
+  ],
+  "title": [
+    "Meest gebruikte filters"
+  ]
+}

@@ -8,28 +8,110 @@ import com.twitter.finagle.http.Request
 import com.twitter.finatra.http.Controller
 import com.twitter.finatra.http.response.ResponseBuilder
 import com.twitter.finatra.http.routing.FileResolver
+import com.twitter.inject.Logging
 import com.twitter.util.Duration
 import consulting.vectr.service.ScheduledLoaderService
 
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
+import com.twitter.finatra.http.request.HttpForward
 
 object AppController {
   private val DEFAULT_EXPIRE_TIME_MS: Long = 86400000L // 1 day
 }
 
-class AppController @Inject() (resolver: FileResolver,
-                               scheduledloader: ScheduledLoaderService) extends Controller {
+class AppController @Inject() (forward: HttpForward,resolver: FileResolver,
+                               scheduledloader: ScheduledLoaderService) extends Controller with Logging {
   import AppController._
 
   private val disableCache: Boolean = false
   scheduledloader.start()
+  
+  
+  get("/ui") {request : Request =>
+    response.ok.fileOrIndex(
+      "",
+      "/app-ui/dashboard.html"
+    )
+  }
+  
+  get("/ui/:*") {request : Request =>
+    forward(request, "/ui")
+  }
 
-  get("/ui/:*") { request: Request =>
-    val resourcePath = request.getParam("*")
+//  get("/ui/:*") { request: Request =>
+//    val resource =   request.getParam("*").split('/').head
+//    resource match{
+//      case "css" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
+//      case "dist" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
+//      case "logos" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
+//      case default => response.ok.fileOrIndex("", "/app-ui/dashboard.html")
+//    }
+//  }
 
-    val fileResourceURI: String = "/app-ui/" + resourcePath
-    //logger.log(Level.FINE, "Webjars resource requested: {0}", webjarsResourceURI)
+  get("/admin") {request : Request =>
+    response.ok.fileOrIndex(
+      "",
+      "/app-ui/admin.html"
+    )
+  }
+
+//  get("/admin/:*") { request: Request =>
+//    val resource =   request.getParam("*").split('/').head
+//    resource match{
+//      case "css" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
+//      case "dist" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
+//      case "logos" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
+//      case default => response.ok.fileOrIndex("", "/app-ui/admin.html")
+//    }
+//  }
+
+  get("/css/:*") {request: Request =>
+    val fileResourceURI: String = "/app-ui/css/" + request.getParam("*")
+
+    if (isDirectoryRequest(fileResourceURI)) {
+      response.forbidden
+    } else {
+      val inputStream = getClass.getResourceAsStream(fileResourceURI)
+      if (inputStream != null) {
+        val resp = response.ok
+        try {
+          val filename: String = getFileName(fileResourceURI)
+          resp.mediaType = resolver.getContentType(filename)
+          resp.body(inputStream)
+        } finally {
+          inputStream.close
+        }
+      } else {
+        response.notFound
+      }
+    }
+  }
+
+  get("/logos/:*") {request: Request =>
+    val fileResourceURI: String = "/app-ui/logos/" + request.getParam("*")
+
+    if (isDirectoryRequest(fileResourceURI)) {
+      response.forbidden
+    } else {
+      val inputStream = getClass.getResourceAsStream(fileResourceURI)
+      if (inputStream != null) {
+        val resp = response.ok
+        try {
+          val filename: String = getFileName(fileResourceURI)
+          resp.mediaType = resolver.getContentType(filename)
+          resp.body(inputStream)
+        } finally {
+          inputStream.close
+        }
+      } else {
+        response.notFound
+      }
+    }
+  }
+
+  get("/dist/:*") {request: Request =>
+    val fileResourceURI: String = "/app-ui/dist/" + request.getParam("*")
 
     if (isDirectoryRequest(fileResourceURI)) {
       response.forbidden

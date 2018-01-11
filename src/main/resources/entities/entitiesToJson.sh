@@ -1,6 +1,6 @@
 echo '{"name":"'$1'","entries":[' > $1.json
 
-curl -H accept:application/json -H content-type:application/json -d '{"statements":[{"statement":"MATCH (a:'$1') RETURN a.name_nl"}]}' http://localhost:1024/db/data/transaction/commit |
+curl -H accept:application/json -H content-type:application/json -d '{"statements":[{"statement":"MATCH (a:'$1') RETURN a.name_fr"}]}' http://localhost:1024/db/data/transaction/commit |
     sed 's/{"row"/\n/g'  |
     sed 's/:\["\(.*\)"\],"meta".*/\1/g' |
     tail -n +2 |

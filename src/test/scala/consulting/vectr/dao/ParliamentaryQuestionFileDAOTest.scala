@@ -26,6 +26,15 @@ class ParliamentaryQuestionFileDAOTest extends FlatSpec with Matchers {
     rm !  pwd / 'src / 'test / 'resources / 'writePQ
     mkdir !  pwd / 'src / 'test / 'resources / 'writePQ
   }
+  it should "thow an exception if the directory doesn't exist" in {
+    val cacheFolder = "/this/is/not/a/valid/path"
+    val conf = ConfigFactory.parseString(s"cachedirectory=$cacheFolder")
+    val filedao = new ParliamentaryQuestionFileDAO(conf)
+
+    assertThrows[Throwable]{
+      filedao.writePQuestion("test", "test")
+    }
+  }
 
   behavior of "loadPQuestions"
   it should "return no PQuestions if the directory is empty" in {
