@@ -6,13 +6,14 @@ import com.twitter.concurrent.AsyncStream
 import com.twitter.finatra.utils.FuturePools
 import com.twitter.inject.Logging
 import consulting.vectr.dao._
-import consulting.vectr.model.{ParliamentaryQuestionSummary, ParliamentaryQuestionWeb, Filter}
+import consulting.vectr.model.{Filter, ParliamentaryQuestionSmallSummary, ParliamentaryQuestionSummary, ParliamentaryQuestionWeb}
 
 class DataService @Inject()(neodao: ParliamentaryQuestionNeo4jDAO,
                             webdao: ParliamentaryQuestionWebDAO,
                             filedao: ParliamentaryQuestionFileDAO,
                             nlpServiceFactory: NLPServiceFactory
                            ) extends Logging {
+
   private val futurePool = FuturePools.unboundedPool("CallbackConverter")
   private val nlpServiceNL = nlpServiceFactory.NLPService("nl")
   private val nlpServiceFR = nlpServiceFactory.NLPService("fr")
@@ -52,6 +53,10 @@ class DataService @Inject()(neodao: ParliamentaryQuestionNeo4jDAO,
 
   def allParliamentaryQuestions(lang: String): List[ParliamentaryQuestionSummary] = {
     neodao.allPQuestions(lang)
+  }
+
+  def AllParliamentaryPaths(lang: String): List[ParliamentaryQuestionSmallSummary] = {
+    neodao.allPaths(lang)
   }
 
   def resolvedEntitiesAndSaveToNeo4j(query: String, lang: String): Map[String, Set[String]] = {
