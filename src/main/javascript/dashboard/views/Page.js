@@ -19,9 +19,9 @@ export const Page = class Page extends Component {
         };
         return (
             <div className="Page">
-                <BrowserDetection>
+                {/* <BrowserDetection>
                     {browserhandler}
-                </BrowserDetection>
+                </BrowserDetection> */}
 
                 <Navigation />
                 <Notifications />

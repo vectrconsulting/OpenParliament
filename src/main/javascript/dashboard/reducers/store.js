@@ -1,20 +1,12 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 
-import filter from './filterReducer'
-import pq from './pqReducer'
-import locale from './localeReducer'
-import http from './httpReducer'
-import faq from './faqReducer'
-import tour from './tourReducer'
+import locale from "./locale";
+import search from "./search";
+import filter from "./filter";
+import data from "./data";
 
 export const store = createStore(
-    combineReducers({
-        locale,
-        filter,
-        pq,
-        http,
-        faq,
-        tour
-    }),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    combineReducers({ locale, search, filter, data }),
+    applyMiddleware(thunk)
 )

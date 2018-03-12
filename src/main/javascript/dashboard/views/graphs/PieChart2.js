@@ -12,7 +12,7 @@ import * as d3 from 'd3'
 import _ from 'lodash'
 
 @connect(state => ({
-    data: state.pq.data.items,
+    data: state.pq.graphdata.items,
     columns: state.pq.columns.items,
     column_colors: state.pq.colors.items,
     column_filters: state.filter.column,

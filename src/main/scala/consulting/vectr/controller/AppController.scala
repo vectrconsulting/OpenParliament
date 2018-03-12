@@ -14,57 +14,24 @@ import consulting.vectr.service.ScheduledLoaderService
 
 import scala.language.postfixOps
 import scala.util.{Failure, Success, Try}
-import com.twitter.finatra.http.request.HttpForward
 
 object AppController {
   private val DEFAULT_EXPIRE_TIME_MS: Long = 86400000L // 1 day
 }
 
-class AppController @Inject() (forward: HttpForward,resolver: FileResolver,
+class AppController @Inject() (resolver: FileResolver,
                                scheduledloader: ScheduledLoaderService) extends Controller with Logging {
   import AppController._
 
   private val disableCache: Boolean = false
   scheduledloader.start()
-  
-  
+
   get("/ui") {request : Request =>
     response.ok.fileOrIndex(
       "",
       "/app-ui/dashboard.html"
     )
   }
-  
-  get("/ui/:*") {request : Request =>
-    forward(request, "/ui")
-  }
-
-//  get("/ui/:*") { request: Request =>
-//    val resource =   request.getParam("*").split('/').head
-//    resource match{
-//      case "css" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
-//      case "dist" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
-//      case "logos" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
-//      case default => response.ok.fileOrIndex("", "/app-ui/dashboard.html")
-//    }
-//  }
-
-  get("/admin") {request : Request =>
-    response.ok.fileOrIndex(
-      "",
-      "/app-ui/admin.html"
-    )
-  }
-
-//  get("/admin/:*") { request: Request =>
-//    val resource =   request.getParam("*").split('/').head
-//    resource match{
-//      case "css" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
-//      case "dist" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
-//      case "logos" => response.ok.fileOrIndex("", "/app-ui/"+request.getParam("*"))
-//      case default => response.ok.fileOrIndex("", "/app-ui/admin.html")
-//    }
-//  }
 
   get("/css/:*") {request: Request =>
     val fileResourceURI: String = "/app-ui/css/" + request.getParam("*")

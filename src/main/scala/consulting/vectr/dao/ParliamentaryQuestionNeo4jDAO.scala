@@ -11,7 +11,7 @@ import org.neo4j.driver.v1.{Driver, Record, Values}
 class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
 
   import scala.collection.JavaConverters._
-  
+
   def storePQuestionWeb(pq: ParliamentaryQuestionWeb): Unit = {
     val session = driver.session()
     try {
@@ -175,6 +175,47 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
       session.close()
     }
 
+  }
+
+  def allPaths(lang: String): List[ParliamentaryQuestionSmallSummary] = {
+    val session = driver.session()
+    try {
+      val cypher =
+        s"""
+           MATCH (p:party)<-[:IS_MEMBER_OF]-(a:author)-[:ASKED]->(q:question)-[:IS_ABOUT]->(t:topic),
+           (q)-[:ASKED_TO]->(d:department),(q)-[:ASKED_FOR]->(p)
+           WHERE q.status = "answerReceived" AND t.name_$lang <> ""
+           RETURN a.name as author,
+           p.name as party,
+           t.name_$lang as topic,
+           d.name__$lang as department_long,
+           d.name_$lang as department,
+           q.date as date
+         """
+
+      session.run(cypher)
+        .asScala
+        .toList
+        .map(rec => ParliamentaryQuestionSmallSummary(
+          rec.get("author").asString(),
+          rec.get("party").asString(),
+          rec.get("topic").asString(),
+          rec.get("department_long").asString(),
+          rec.get("department").asString(),
+          rec.get("date").asString(),
+          1
+        ))
+
+    } catch {
+      case client: ClientException =>
+        client.printStackTrace()
+        throw client
+      case x: Throwable =>
+        x.printStackTrace()
+        throw x
+    } finally {
+      session.close()
+    }
   }
 
   def allSDOCNAMES: Set[String] = {

@@ -15,6 +15,7 @@ import { v4 } from 'uuid'
 
 @connect(state => ({
     data: state.pq.data.items,
+    dataloading: state.pq.data.loading,
     columns: state.pq.columns.items,
     column_colors: state.pq.colors.items,
     column_filters: state.filter.column,
@@ -30,7 +31,7 @@ export const NPartiteGraph = class NPartitGraph extends Component {
         this.columnWidth = props.columnWidth !== undefined ? props.columnWidth : 2; // relative column size
         this.columnSpacing = props.columnSpacing !== undefined ? props.columnSpacing : 1; // relative columnspacing (edges)
         this.padding = props.padding !== undefined ? props.padding : 5; // padding in pixels
-        this.valueField = props.valueField !== undefined ? props.valueField : "question_count"; // property containing value, defaults to question_count
+        this.valueField = props.valueField !== undefined ? props.valueField : "count"; // property containing value, defaults to question_count
         this.minimum_date = _.minBy(this.props.data, 'date').date
         this.maximum_date = _.maxBy(this.props.data, 'date').date
         this.globalTotal = _.sumBy(this.props.data, this.valueField);
@@ -171,6 +172,7 @@ export const NPartiteGraph = class NPartitGraph extends Component {
     }
 
     render() {
+        if (this.props.dataloading) return <div align="center">Loading...</div>;
         if (this.props.columns.length === 0) return <div />;
         const filtered = this.filterData(_.cloneDeep(this.props.data));
         const filtered_low_occurences_fixed = this.filterLowOccurences(filtered);

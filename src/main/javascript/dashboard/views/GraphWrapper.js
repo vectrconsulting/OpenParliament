@@ -12,7 +12,7 @@ import { DateFilter } from './DateFilter'
 import { Share } from './Share'
 
 @connect(state => ({
-    data: state.pq.data,
+    data: state.pq.graphdata,
     columns: state.pq.columns.items,
     current_language: state.locale.current_language.translation,
 }))
@@ -93,7 +93,7 @@ export const GraphWrapper = class GraphWrapper extends Component {
     render() {
         return (
             <Well >
-                <Nav bsStyle="tabs" justified activeKey={this.state.activeKey} onSelect={this.handleSelect.bind(this)}>
+                <Nav bsStyle="tabs" activeKey={this.state.activeKey} onSelect={this.handleSelect.bind(this)}>
                     <NavItem eventKey="pie">{this.props.current_language.pie_tab}</NavItem>
                     <NavItem eventKey="trending">{this.props.current_language.trending_tab}</NavItem>
                     <NavItem eventKey="npartite">{this.props.current_language.bar_tab}</NavItem>

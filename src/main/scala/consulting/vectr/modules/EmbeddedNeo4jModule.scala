@@ -38,7 +38,7 @@ object EmbeddedNeo4jModule extends TwitterModule with Logging {
     val session = driver.session()
     val index = Source.fromInputStream(this.getClass.getResourceAsStream("/Indexes.cql"))
 
-    index.getLines().filter(line => line.contains("CREATE") || line.contains("MERGE")).foreach(session.run)
+//    index.getLines().filter(line => line.contains("CREATE") || line.contains("MERGE")).foreach(session.run)
     session.close()
     index.close()
     info(s"neo4j url: ${control.httpURI()}")

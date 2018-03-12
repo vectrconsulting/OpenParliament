@@ -13,7 +13,7 @@ import * as d3 from 'd3'
 import _ from 'lodash'
 
 @connect(state => ({
-    data: state.pq.data.items,
+    data: state.pq.graphdata.items,
     columns: state.pq.columns.items,
     column_colors: state.pq.colors.items,
     column_filters: state.filter.column,
@@ -62,7 +62,7 @@ export const TrendingChart = class TrendingChart extends Component {
      */
     filterTop(data) {
         // if active column contains the filter don't filter the data
-        if(this.props.column_filters[this.state.activeColumn]) return data
+        if (this.props.column_filters[this.state.activeColumn]) return data
         const getValues = (column) => {
             const nested = d3.nest()
                 .key(d => d[column])
