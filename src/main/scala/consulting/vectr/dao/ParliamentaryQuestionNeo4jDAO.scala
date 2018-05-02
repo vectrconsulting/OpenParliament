@@ -438,7 +438,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
     val session = driver.session()
     val result = session.run(cypher).asScala.toList
     session.close()
-    val names = result.map(element => element.get("name").asString())
+    val names = result.map(element => element.get("name").asString()).filter(x => x != "Minister").filter(x => x != "Ministre")
     Entity("topic", names.map(name => EntityValue(name, List(name.toLowerCase))))
   }
 

@@ -3,13 +3,13 @@ export const fr_lang = {
     translation: {
         header: 'Questions des parlementaires au gouvernement fédéral',
         footer: 'Réalisé par',
-        pie_tab: "Diagramme circulair",
+        pie_tab: "Diagramme circulaire",
         trending_tab: "Graphique en ligne",
         bar_tab: "Diagramme fleuve",
         other: "Autres",
         top_filters: "Filtres les plus utilisés",
         search: "Chercher",
-        example_question: "Posez une question comme celle-ci: \"Donnez-moi toutes les questions au Premier ministre\"",
+        example_question: "Recherche par mot clé",
         
         months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre"],
         columns: {

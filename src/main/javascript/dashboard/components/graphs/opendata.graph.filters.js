@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import Slider from "rc-slider";
@@ -42,7 +41,7 @@ export class Filters extends Component {
 
     getDateFilter() {
         const extended_moment = extendMoment(moment);
-        const range = Array.from(moment
+        const range = Array.from(extended_moment
             .range(moment(this.props.date_options.min), moment(this.props.date_options.max))
             .by("day"))
             .map(day => day.format("YYYY-MM-DD"));
@@ -51,17 +50,15 @@ export class Filters extends Component {
         const Range = createSliderWithTooltip(Slider.Range);
         return (
             <div className="row" style={{ width: "100%", marginLeft: 0, marginRight: 0, paddingTop: 10 }}>
-                <div className="col-md-3">
-                    <center>
-                        <DatePicker
-                            customInput={<DatePickerInput />}
-                            dateFormat="YYYY-MM-DD"
-                            selected={moment(this.props.dates.start || this.props.date_options.min)}
-                            minDate={moment(this.props.date_options.min)}
-                            maxDate={moment(this.props.date_options.max)}
-                            onChange={(date) => this.dateFilter(date.format("YYYY-MM-DD"), this.props.dates.end || this.props.date_options.max)}
-                        />
-                    </center>
+                <div className="col-md-3" style={{textAlign: "center"}}>
+                    <DatePicker
+                        customInput={<DatePickerInput />}
+                        dateFormat="YYYY-MM-DD"
+                        selected={moment(this.props.dates.start || this.props.date_options.min)}
+                        minDate={moment(this.props.date_options.min)}
+                        maxDate={moment(this.props.date_options.max)}
+                        onChange={(date) => this.dateFilter(date.format("YYYY-MM-DD"), this.props.dates.end || this.props.date_options.max)}
+                    />
                 </div>
                 <div className="col-md-6">
                     <Range
@@ -69,20 +66,18 @@ export class Filters extends Component {
                         max={range.length - 1}
                         defaultValue={[range.findIndex(item => item === (this.props.dates.start || this.props.date_options.min)), range.findIndex(item => item === (this.props.dates.end || this.props.date_options.max))]}
                         onAfterChange={(indexes) => this.dateFilter(range[indexes[0]], range[indexes[1]])}
-                        tipFormatter={index => moment(range[index]).format("D MMMM Y")}
+                        tipFormatter={index => moment(range[index]).format("DD-MM-YYYY")}
                     />
                 </div>
-                <div className="col-md-3">
-                    <center>
-                        <DatePicker
-                            customInput={<DatePickerInput />}
-                            dateFormat="YYYY-MM-DD"
-                            selected={moment(this.props.dates.end || this.props.date_options.max)}
-                            minDate={moment(this.props.date_options.min)}
-                            maxDate={moment(this.props.date_options.max)}
-                            onChange={(date) => this.dateFilter(this.props.dates.start || this.props.date_options.min, date.format("YYYY-MM-DD"))}
-                        />
-                    </center>
+                <div className="col-md-3" style={{textAlign: "center"}}>
+                    <DatePicker
+                        customInput={<DatePickerInput />}
+                        dateFormat="YYYY-MM-DD"
+                        selected={moment(this.props.dates.end || this.props.date_options.max)}
+                        minDate={moment(this.props.date_options.min)}
+                        maxDate={moment(this.props.date_options.max)}
+                        onChange={(date) => this.dateFilter(this.props.dates.start || this.props.date_options.min, date.format("YYYY-MM-DD"))}
+                    />
                 </div>
             </div>
         );
@@ -107,7 +102,7 @@ class DatePickerInput extends Component {
                 className="form-control"
                 style={{ width: "100%" }}
                 onClick={this.props.onClick}
-                value={moment(this.props.value).format("D MMMM Y")}
+                value={moment(this.props.value).format("DD-MM-YYYY")}
                 readOnly={true}
             />
         );

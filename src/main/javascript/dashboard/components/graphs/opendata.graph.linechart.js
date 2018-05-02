@@ -9,7 +9,7 @@ import { filterData, setColumnFilter } from "../../reducers/filter";
 
 export class GraphLineChart extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.party = "party";
         this.author = "author";
         this.topic = "topic";
@@ -158,7 +158,7 @@ export class GraphLineChart extends Component {
 
 export default connect(
     state => ({
-        data: filterData(state.data.paths.items, state.filter.columns, state.filter.dates).toArray(),
+        data: filterData(state.data.paths.items, state.filter.columns, state.filter.dates, state.search.question).toArray(),
         colors: state.data.colors,
         columns: state.data.columns,
         columnFilters: state.filter.columns,

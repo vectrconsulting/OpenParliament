@@ -1,10 +1,11 @@
 import React, {Component} from "react";
-
+import PropTypes from "prop-types";
 import * as d3 from "d3";
+import {List} from "immutable";
 
 export class Npartite extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.columnWidth = 3; // relative to spacing
         this.columnSpacing = 2; // relative to width
         this.padding = 5; // absolute in pixels
@@ -118,8 +119,7 @@ export class Npartite extends Component {
                             </g>
                         );
                     }
-
-                }
+                };
 
                 const offsetY = columnValues.slice(0, index).reduce((acc, row) => acc + row.count, 0) * scaleY + index * this.padding;
                 return (
@@ -136,7 +136,7 @@ export class Npartite extends Component {
                         {getLabel()}
                     </g>
                 );
-            })
+            });
 
             const offsetX = index * (this.columnWidth + this.columnSpacing) * scaleX;
             return (
@@ -144,12 +144,12 @@ export class Npartite extends Component {
                     {blocks}
                 </g>
             )
-        })
+        });
         return (
             <g key={`npartite-columns`}>
                 {columns}
             </g>
-        )
+        );
     }
 
     getEdges(data, colorOrder, scaleX, total) {
@@ -170,7 +170,7 @@ export class Npartite extends Component {
             return 0;
         };
 
-        const edgeMaps = new Map(this.props.columns.map((columnName, index, columns) => {
+        const edgeMaps = new Map(this.props.columns.map((columnName) => {
             const columnValues = d3.nest()
                 .key(d => d[columnName])
                 .rollup(d => d
@@ -226,6 +226,12 @@ export class Npartite extends Component {
     }
 
     render() {
+        // const new_aggregatedData = List(this.props.data)
+        //     .map(d => Object.assign({}, d, {key: this.props.columns.map(column => d[column]).join("#")}))
+        //     .groupBy(d => d.key).toList()
+        //     .map(d => Object.assign({}, d.first(), {[this.props.weightKey]: d.countBy(d => d[this.props.weightKey])}));
+        // console.log(new_aggregatedData.toJS());
+
         const aggregatedData = d3.nest()
             .key(d => this.props.columns.map(column => d[column]).join("#"))
             .rollup(d => Object.assign({}, d[0], {count: d.reduce((acc, row) => acc + row[this.props.weightKey], 0)}))
@@ -249,5 +255,16 @@ export class Npartite extends Component {
     }
 }
 
+Npartite.propTypes = {
+    width: PropTypes.number,
+    height: PropTypes.number,
+    data: PropTypes.arrayOf(PropTypes.object),
+    columns: PropTypes.arrayOf(PropTypes.string),
+    colorKey: PropTypes.string,
+    weightKey: PropTypes.string,
+    otherKey: PropTypes.string,
+    onClick: PropTypes.func,
+    total: PropTypes.number
+};
 
 export default Npartite;
