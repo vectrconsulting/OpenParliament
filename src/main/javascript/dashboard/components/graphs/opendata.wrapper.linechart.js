@@ -5,7 +5,6 @@ import GraphLineChart from "./opendata.graph.linechart";
 
 
 export class LineChartWrapper extends Component {
-
     render() {
         return (
             <div className="opendata-linechart-wrapper">

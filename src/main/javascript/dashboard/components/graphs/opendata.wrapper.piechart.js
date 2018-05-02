@@ -5,7 +5,6 @@ import GraphPieChart from "./opendata.graph.piechart";
 
 
 export class PieChartWrapper extends Component {
-
     render() {
         return (
             <div className="opendata-piechart-wrapper">

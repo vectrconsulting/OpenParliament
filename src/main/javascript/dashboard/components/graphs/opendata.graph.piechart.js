@@ -1,12 +1,10 @@
-import React, { Component } from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import React, {Component} from "react";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
 import * as d3 from "d3";
-import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Sector } from "recharts"
-
-
-import { filterData, setColumnFilter } from "../../reducers/filter";
-import { filterLowOccurences } from "../../reducers/data";
+import {ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Sector} from "recharts";
+import {filterData, setColumnFilter} from "../../reducers/filter";
+import {filterLowOccurences} from "../../reducers/data";
 
 
 export class GraphPieChart extends Component {
@@ -39,8 +37,10 @@ export class GraphPieChart extends Component {
             }));
             const renderActiveShape = (props) => {
                 const RADIAN = Math.PI / 180;
-                const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-                    fill, payload, percent, value } = props;
+                const {
+                    cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
+                    fill, payload, percent, value
+                } = props;
                 const sin = Math.sin(-RADIAN * midAngle);
                 const cos = Math.cos(-RADIAN * midAngle);
                 const sx = cx + (outerRadius + 3) * cos;
@@ -64,7 +64,9 @@ export class GraphPieChart extends Component {
                             outerRadius={outerRadius}
                             startAngle={startAngle}
                             endAngle={endAngle}
-                            onClick={(item) => { if (item !== this.props.otherKeyword) this.columnFilter(column, [{ value: item.name }]) }}
+                            onClick={(item) => {
+                                if (item !== this.props.otherKeyword) this.columnFilter(column, [{value: item.name}])
+                            }}
                             fill={fill}
                         />
                         <Sector
@@ -76,8 +78,8 @@ export class GraphPieChart extends Component {
                             outerRadius={outerRadius + 3}
                             fill={fill}
                         />
-                        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
-                        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
+                        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none"/>
+                        <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none"/>
                         <text x={ex + (cos >= 0 ? 1 : -1) * 3} y={ey} textAnchor={textAnchor} fill="#333" fontSize={11}>
                             {payload.name}
                         </text>
@@ -95,11 +97,13 @@ export class GraphPieChart extends Component {
                     nameKey="name"
                     startAngle={90}
                     endAngle={450}
-                    onClick={(item) => { if (item !== this.props.otherKeyword) this.columnFilter(column, [{ value: item.name }]) }}
+                    onClick={(item) => {
+                        if (item !== this.props.otherKeyword) this.columnFilter(column, [{value: item.name}])
+                    }}
                     activeIndex={activeIndexes}
                     activeShape={renderActiveShape}
                 >
-                    {pie_data.map(entry => <Cell key={`cell-${column}-${entry.value}`} fill={entry.color} />)}
+                    {pie_data.map(entry => <Cell key={`cell-${column}-${entry.value}`} fill={entry.color}/>)}
                 </Pie>
             );
         });
@@ -107,11 +111,11 @@ export class GraphPieChart extends Component {
 
     getSingleRow(data) {
         return (
-            <div className="d-none d-md-block" style={{ paddingTop: 40 }}>
+            <div className="d-none d-md-block" style={{paddingTop: 40}}>
                 <ResponsiveContainer width="100%" height={200}>
-                    <PieChart margin={{ top: 20, right: 0, bottom: 20, left: 0 }}>
+                    <PieChart margin={{top: 20, right: 0, bottom: 20, left: 0}}>
                         {this.getPies(data, false)}
-                        <Tooltip />
+                        <Tooltip/>
                     </PieChart>
                 </ResponsiveContainer>
             </div>
@@ -120,11 +124,11 @@ export class GraphPieChart extends Component {
 
     getMultipleRows(data) {
         return this.getPies(data, true).map((pie, index) =>
-            <div className="d-xs-block d-sm-block d-md-none" key={`pie-row-${index}`} style={{ paddingTop: 40 }}>
+            <div className="d-xs-block d-sm-block d-md-none" key={`pie-row-${index}`} style={{paddingTop: 40}}>
                 <ResponsiveContainer width="100%" height={200}>
-                    <PieChart margin={{ top: 20, right: 0, bottom: 20, left: 0 }}>
+                    <PieChart margin={{top: 20, right: 0, bottom: 20, left: 0}}>
                         {pie}
-                        <Tooltip />
+                        <Tooltip/>
                     </PieChart>
                 </ResponsiveContainer>
             </div>
@@ -135,7 +139,7 @@ export class GraphPieChart extends Component {
         const filtered_low_occ = filterLowOccurences(this.props.data, this.props.columns, this.props.otherKeyword);
 
         return (
-            <div className="opendata-graph-piechart" style={{ paddingTop: 40 }}>
+            <div className="opendata-graph-piechart" style={{paddingTop: 40}}>
                 {this.getSingleRow(filtered_low_occ)}
                 {this.getMultipleRows(filtered_low_occ)}
             </div>
@@ -146,10 +150,10 @@ export class GraphPieChart extends Component {
 
 export default connect(
     state => ({
-        data: filterData(state.data.paths.items, state.filter.columns, state.filter.dates).toArray(),
+        data: filterData(state.data.paths.items, state.filter.columns, state.filter.dates, state.search.question).toArray(),
         colors: state.data.colors,
         columns: state.data.columns,
         otherKeyword: state.locale.translation.other
     }),
-    dispatch => bindActionCreators({ setColumnFilter }, dispatch)
+    dispatch => bindActionCreators({setColumnFilter}, dispatch)
 )(GraphPieChart)

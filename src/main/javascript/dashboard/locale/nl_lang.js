@@ -9,7 +9,7 @@ export const nl_lang = {
         other: "Overige",
         top_filters: "Meest gebruikte filters",
         search: "Zoeken",
-        example_question: "Stel hier een vraag zoals: \"Geef mij alle vragen aan de eerste minister\"",
+        example_question: "Zoeken op trefwoord",
         months: ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"],
         share: {
             share: "Deel de huidige filters",

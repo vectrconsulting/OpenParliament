@@ -26,10 +26,24 @@ class AppController @Inject() (resolver: FileResolver,
   private val disableCache: Boolean = false
   scheduledloader.start()
 
+  get("/") {request : Request =>
+      response.ok.fileOrIndex(
+        "",
+        "/app-ui/welcome.html"
+      )
+    }
+
   get("/ui") {request : Request =>
     response.ok.fileOrIndex(
       "",
       "/app-ui/dashboard.html"
+    )
+  }
+  
+  get("/test.html") {request : Request =>
+    response.ok.fileOrIndex(
+      "",
+      "/app-ui/test.html"
     )
   }
 
