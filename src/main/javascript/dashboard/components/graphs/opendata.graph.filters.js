@@ -21,12 +21,20 @@ export class Filters extends Component {
     getColumnFilters() {
         return this.props.column_options.map(column => {
             const filter = _.find(this.props.columns, { columnName: column.columnName }) || { values: [] };
+            const compare = (column.columnName == "author" || column.columnName == "department")?
+                (a,b) => a.split(/ (.+)/)[1].toLowerCase().localeCompare(b.split(/ (.+)/)[1].toLowerCase()):
+                (a,b) => a.localeCompare(b);
+
             return (
                 <div className="col-md" key={`${column.columnName}filter`}>
                     <Select
                         placeholder={this.props.translations[column.columnName]}
                         multi={true}
-                        options={column.options.sort().map(d => ({ value: d, label: d }))}
+                        options={
+                            column.options
+                                .sort(compare)
+                                .map(d => ({ value: d, label: d }))
+                        }
                         onChange={val => this.columnFilter(column.columnName, val)}
                         value={filter.values.map(d => ({ value: d, label: d }))}
                     />
@@ -50,7 +58,7 @@ export class Filters extends Component {
         const Range = createSliderWithTooltip(Slider.Range);
         return (
             <div className="row" style={{ width: "100%", marginLeft: 0, marginRight: 0, paddingTop: 10 }}>
-                <div className="col-md-3" style={{textAlign: "center"}}>
+                <div className="col-md-3" style={{ textAlign: "center" }}>
                     <DatePicker
                         customInput={<DatePickerInput />}
                         dateFormat="YYYY-MM-DD"
@@ -69,7 +77,7 @@ export class Filters extends Component {
                         tipFormatter={index => moment(range[index]).format("DD-MM-YYYY")}
                     />
                 </div>
-                <div className="col-md-3" style={{textAlign: "center"}}>
+                <div className="col-md-3" style={{ textAlign: "center" }}>
                     <DatePicker
                         customInput={<DatePickerInput />}
                         dateFormat="YYYY-MM-DD"

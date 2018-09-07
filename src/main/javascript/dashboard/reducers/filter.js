@@ -10,22 +10,24 @@ import {
 const columnNames = ["party", "author", "topic", "department"];
 
 const getColumnOptions = (data, filters, dates) => {
-
+    
     const filter_func = (row, columnName) => {
         if ((dates.start && row.date < dates.start) || (dates.end && dates.end < row.date)) return false;
         for (const filter of filters) {
             if (filter.columnName !== columnName && !filter.values.includes(row[filter.columnName]))
                 return false;
         }
-
         return true;
     }
+
 
     const options = columnNames.map(columnName => ({
         columnName: columnName,
         options: _(data)
             .filter(row => filter_func(row, columnName))
-            .map(item => item[columnName]).uniq().value()
+            .map(item => item[columnName])
+            .uniq()
+            .value()
     }));
     return options;
 }
