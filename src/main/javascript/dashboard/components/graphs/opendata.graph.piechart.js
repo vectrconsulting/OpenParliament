@@ -65,7 +65,7 @@ export class GraphPieChart extends Component {
                             startAngle={startAngle}
                             endAngle={endAngle}
                             onClick={(item) => {
-                                if (item !== this.props.otherKeyword) this.columnFilter(column, [{value: item.name}])
+                                if (item.name !== this.props.otherKeyword) this.columnFilter(column, [{value: item.name}])
                             }}
                             fill={fill}
                         />
@@ -98,7 +98,7 @@ export class GraphPieChart extends Component {
                     startAngle={90}
                     endAngle={450}
                     onClick={(item) => {
-                        if (item !== this.props.otherKeyword) this.columnFilter(column, [{value: item.name}])
+                        if (item.name !== this.props.otherKeyword) this.columnFilter(column, [{value: item.name}])
                     }}
                     activeIndex={activeIndexes}
                     activeShape={renderActiveShape}

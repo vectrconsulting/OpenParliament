@@ -18,9 +18,11 @@ class ParliamentaryQuestionFileDAO @Inject()(config: Config) extends Logging {
   val directory = Path(config.getString("cachedirectory"))
 
   def writePQuestion(filename: String, content: String): Unit = {
-    rm ! Path(directory + "/" + filename + ".json")
-    val file = new File(directory + "/" + filename + ".json")
+    rm ! Path(s"${directory}/${filename}.json")
+    val file = new File(s"${directory}/${filename}.json")
     try{
+      debug(s"writing ${directory}/${filename}.json")
+      file.createNewFile()
       val fw = new FileWriter(file)
       val bw = new BufferedWriter(fw)
       bw.write(content)
@@ -28,6 +30,7 @@ class ParliamentaryQuestionFileDAO @Inject()(config: Config) extends Logging {
     }catch {
       case x: Throwable =>
         error(x.getMessage)
+        x.getStackTrace.foreach(ste => error(ste.toString))
         throw x
     } finally {
     }

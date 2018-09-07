@@ -62,28 +62,23 @@ class ParliamentaryQuestionWebDAO @Inject()(http: HttpService) extends Logging {
 
   def getObject(sdocname: String): Option[(String, ParliamentaryQuestionWeb)] = {
     try {
+      debug(s"retrieving http://data.dekamer.be/v0/qrva/${sdocname}")
       val response: HttpResponse[String] =
-        http.url("http://data.dekamer.be/v0/qrva/" + sdocname)
+        http.url(s"http://data.dekamer.be/v0/qrva/${sdocname}")
       if (response.code != 200) {
-          None
+        None
       } else {
         decode[DekamerQRVAIdResponse](response.body) match {
-          case Left(error_msg) =>
-            None
-          case Right(qRVAIdResponse) =>
-            qRVAIdResponse.items.headOption match {
-              case None =>
-                None
-              case Some(head) =>
-                Some((response.body, createParliamentaryQuestionWeb(head)))
-            }
+          case Left(error_msg) => None
+          case Right(qRVAIdResponse) => qRVAIdResponse.items.headOption match {
+            case None => None
+            case Some(head) => Some((response.body, createParliamentaryQuestionWeb(head)))
+          }
         }
       }
     } catch {
-      case nwerror: SocketTimeoutException =>
-        None
-      case othererror: Throwable =>
-        throw othererror
+      case nwerror: SocketTimeoutException => None
+      case othererror: Throwable => throw othererror
     }
   }
 

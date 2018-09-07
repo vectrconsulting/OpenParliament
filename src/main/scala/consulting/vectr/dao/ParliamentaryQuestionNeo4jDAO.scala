@@ -35,7 +35,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
           "name" -> pq.author,
           "dep_name_nl" -> pq.department_name_nl,
           "parname" -> pq.author_party,
-          "questionid" -> pq.document_id.toString,
+          "questionid" -> pq.sdocname,
           "status" -> pq.status,
           "title_nl" -> pq.title_nl,
           "title_fr" -> pq.title_fr,
@@ -51,7 +51,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
           """
         session.run(date_cypher,
           Map[String, Object](
-            "question_id" -> pq.document_id,
+            "question_id" -> pq.sdocname,
             "date" -> (date.substring(0, 4) + "-" + date.substring(4, 6) + "-" + date.substring(6, 8))
           ).asJava)
       }
@@ -63,7 +63,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
           """
         session.run(title_nl_cypher,
           Map[String, Object](
-            "question_id" -> pq.document_id,
+            "question_id" -> pq.sdocname,
             "question_nl" -> question_nl.trim
           ).asJava)
       }
@@ -75,7 +75,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
           """
         session.run(title_fr_cypher,
           Map[String, Object](
-            "question_id" -> pq.document_id,
+            "question_id" -> pq.sdocname,
             "question_fr" -> question_fr.trim
           ).asJava)
       }
@@ -87,7 +87,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
           """
         session.run(title_fr_cypher,
           Map[String, Object](
-            "question_id" -> pq.document_id,
+            "question_id" -> pq.sdocname,
             "answer_nl" -> answer_nl.trim
           ).asJava)
       }
@@ -99,7 +99,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
           """
         session.run(title_fr_cypher,
           Map[String, Object](
-            "question_id" -> pq.document_id,
+            "question_id" -> pq.sdocname,
             "answer_fr" -> answer_fr.trim
           ).asJava)
       }
@@ -113,7 +113,7 @@ class ParliamentaryQuestionNeo4jDAO @Inject()(driver: Driver) extends Logging {
         """
         session.run(topicCypher,
           Map[String, Object](
-            "questionid" -> pq.document_id.toString,
+            "questionid" -> pq.sdocname.toString,
             "topicname_nl" -> topic.trim.toLowerCase.capitalize,
             "topicname_fr" -> pq.subject_fr.getOrElse("").trim.toLowerCase.capitalize
           ).asJava)
