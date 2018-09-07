@@ -74,7 +74,7 @@ export class QuestionTable extends Component {
     modal() {
         if (this.state.show_modal)
             return (
-                <Modal visible={true}
+                <Modal visible={true} dialogClassName={"modal-lg"}
                        onClickBackdrop={() => this.setState({show_modal: false, data_for_modal: undefined})}>
                     <div className="modal-header">
                         <h5 className="modal-title">
@@ -86,10 +86,10 @@ export class QuestionTable extends Component {
                         </button>
                     </div>
                     <div className="modal-body">
-                        <table className="table">
+                        <table className="table" style={{"table-layout": "fixed"}}>
                             <tbody>
-                            <tr>
-                                <td style={{valign: "top"}}>{this.props.columnTranslations["party"]}</td>
+                            <tr >
+                                <td style={{valign: "top", width:"30%"}}>{this.props.columnTranslations["party"]}</td>
                                 <td>{this.state.data_for_modal.party}</td>
                             </tr>
                             <tr>
@@ -114,7 +114,7 @@ export class QuestionTable extends Component {
                             </tr>
                             <tr>
                                 <td style={{valign: "top"}}>{this.props.columnTranslations["answer"]}</td>
-                                <td>{this.state.data_for_modal.answer}</td>
+                                <td style={{"word-wrap": "break-word"}}>{this.state.data_for_modal.answer}</td>
                             </tr>
                             </tbody>
                         </table>
